@@ -3,72 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Tracker Calendar</title>
+    <title>⚡ Neon Habit Hero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-top">
-                <h1>📅 Habit Tracker</h1>
-                <button id="darkModeToggle" class="icon-btn">🌙</button>
+    <!-- Background Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Main Container -->
+    <div class="neon-container">
+        <!-- Header -->
+        <header class="cyber-header">
+            <div class="profile-section">
+                <div class="avatar-ring" id="avatarRing">
+                    <div class="level-badge">LVL <span id="userLevel">1</span></div>
+                    <div class="avatar">🦾</div>
+                </div>
+                <div class="player-info">
+                    <h2 class="player-name">Habit Hero</h2>
+                    <div class="xp-bar-container">
+                        <div class="xp-bar-fill" id="xpBar"></div>
+                    </div>
+                    <p class="xp-text"><span id="currentXP">0</span> / <span id="nextLevelXP">100</span> XP</p>
+                </div>
             </div>
-            <div class="month-nav">
-                <button id="prevMonth">&lt;</button>
-                <h2 id="currentMonth"></h2>
-                <button id="nextMonth">&gt;</button>
-            </div>
+            
+            <button class="glow-btn" id="settingsBtn">⚙️</button>
         </header>
         
-        <!-- Stats Bar -->
-        <div class="stats-bar">
-            <div class="stat-item">
-                <span class="stat-label">Current Streak</span>
-                <span class="stat-value" id="currentStreak">0</span>
+        <!-- Month Navigation -->
+        <div class="month-controls">
+            <button class="nav-btn neon-arrow" id="prevMonth">◀</button>
+            <h2 class="cyber-title" id="currentMonth">JANUARY 2025</h2>
+            <button class="nav-btn neon-arrow" id="nextMonth">▶</button>
+        </div>
+        
+        <!-- Stats Dashboard -->
+        <div class="stats-grid">
+            <div class="stat-card fire-theme">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-content">
+                    <span class="stat-value pulse-fire" id="currentStreak">0</span>
+                    <span class="stat-label">DAY STREAK</span>
+                </div>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">This Month</span>
-                <span class="stat-value" id="monthProgress">0/31</span>
+            <div class="stat-card lightning-theme">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-content">
+                    <span class="stat-value" id="weeklyCompletion">0%</span>
+                    <span class="stat-label">WEEKLY</span>
+                </div>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">All Time</span>
-                <span class="stat-value" id="totalDays">0</span>
+            <div class="stat-card crystal-theme">
+                <div class="stat-icon">💎</div>
+                <div class="stat-content">
+                    <span class="stat-value" id="badgesEarned">0</span>
+                    <span class="stat-label">BADGES</span>
+                </div>
+            </div>
+            <div class="stat-card moon-theme">
+                <div class="stat-icon">🌙</div>
+                <div class="stat-content">
+                    <span class="stat-value" id="completionRate">0%</span>
+                    <span class="stat-label">RATE</span>
+                </div>
             </div>
         </div>
         
-        <div class="weekday-header">
-            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
-            <div>Thu</div><div>Fri</div><div>Sat</div>
+        <!-- Weekly Goal Progress -->
+        <div class="mission-panel">
+            <h3 class="cyber-subtitle">🎯 TODAY'S MISSION</h3>
+            <div class="mission-progress">
+                <div class="mission-bar" id="dailyMissionBar"></div>
+            </div>
+            <p class="mission-text" id="missionText">Complete your habit to earn +10 XP!</p>
         </div>
         
-        <div class="calendar-grid" id="calendar"></div>
-        
-        <!-- Goal Section -->
-        <div class="goal-section">
-            <label for="monthlyGoal">Monthly Goal:</label>
-            <input type="number" id="monthlyGoal" min="1" max="31" value="20">
-            <button id="saveGoal">Set Goal</button>
+        <!-- Calendar Grid -->
+        <div class="weekday-names">
+            <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div>
+            <div>THU</div><div>FRI</div><div>SAT</div>
         </div>
         
-        <div class="data-controls">
-            <button id="exportData">📥 Export Data</button>
-            <button id="importData">📤 Import Data</button>
-            <input type="file" id="importFile" accept=".json" hidden>
+        <div class="cyber-grid" id="calendar"></div>
+        
+        <!-- Quick Actions -->
+        <div class="action-bar">
+            <button class="action-btn cyber-btn" id="checkInBtn">
+                <span class="btn-icon">✅</span>
+                <span class="btn-text">TODAY CHECK-IN</span>
+            </button>
+            <button class="action-btn cyber-btn secondary" id="statsBtn">
+                <span class="btn-icon">📊</span>
+                <span class="btn-text">ANALYTICS</span>
+            </button>
+            <button class="action-btn cyber-btn danger" id="clearBtn">
+                <span class="btn-icon">🗑️</span>
+                <span class="btn-text">RESET</span>
+            </button>
         </div>
         
-        <footer>
-            <p>💡 Click any day to toggle completion</p>
+        <!-- Achievements Modal -->
+        <div class="modal-overlay" id="achievementsModal">
+            <div class="modal-content cyber-modal">
+                <button class="modal-close" id="closeAchievements">×</button>
+                <h2>🏆 ACHIEVEMENTS</h2>
+                <div class="achievements-grid" id="achievementsGrid"></div>
+            </div>
+        </div>
+        
+        <!-- Analytics Modal -->
+        <div class="modal-overlay" id="analyticsModal">
+            <div class="modal-content cyber-modal wide">
+                <button class="modal-close" id="closeAnalytics">×</button>
+                <h2>📊 ANALYTICS DASHBOARD</h2>
+                <canvas id="yearlyChart" height="250"></canvas>
+                <div class="chart-stats" id="chartStats"></div>
+            </div>
+        </div>
+        
+        <!-- Streak Celebration -->
+        <div class="celebration-overlay" id="celebrationOverlay">
+            <div class="celebration-content">
+                <h1 class="celebrate-title">🔥 STREAK UNLOCKED!</h1>
+                <p class="celebrate-streak" id="celebrateStreakNum">7</p>
+                <p class="celebrate-msg">YOU'RE ON FIRE! KEEP IT UP!</p>
+                <div class="fire-animation" id="fireAnimation"></div>
+            </div>
+        </div>
+        
+        <footer class="cyber-footer">
+            <p>✨ Tap any day to mark • Double-tap for notes • Stay consistent, stay legendary ✨</p>
         </footer>
     </div>
     
-    <!-- Chart for yearly view -->
-    <div class="modal" id="chartModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <h3>Yearly Progress</h3>
-            <canvas id="progressChart" height="300"></canvas>
-        </div>
-    </div>
+    <!-- Audio Elements (Optional) -->
+    <audio id="successSound" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU"></audio>
+    <audio id="streakSound" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU"></audio>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
