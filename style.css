@@ -11,6 +11,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    transition: background 0.3s ease;
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
 
 .container {
@@ -20,6 +26,17 @@ body {
     padding: 24px;
     max-width: 400px;
     width: 95%;
+    transition: background 0.3s ease;
+}
+
+body.dark-mode .container {
+    background: #1e1e2f;
+}
+
+body.dark-mode h1, body.dark-mode h2, 
+body.dark-mode .day:not(.completed),
+body.dark-mode footer p {
+    color: #e0e0e0;
 }
 
 header {
@@ -27,10 +44,26 @@ header {
     margin-bottom: 20px;
 }
 
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
 header h1 {
     color: #333;
-    margin-bottom: 16px;
     font-size: 24px;
+}
+
+.icon-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
 }
 
 .month-nav {
@@ -57,6 +90,45 @@ header h1 {
 #currentMonth {
     color: #555;
     font-weight: 600;
+    font-size: 18px;
+}
+
+/* Stats Bar */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    background: #f5f6ff;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+body.dark-mode .stats-bar {
+    background: #2a2a4a;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+body.dark-mode .stat-label {
+    color: #aaa;
 }
 
 .weekday-header {
@@ -105,14 +177,103 @@ header h1 {
     cursor: default;
 }
 
+/* Goal Section */
+.goal-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 12px;
+    background: #f5f6ff;
+    border-radius: 12px;
+}
+
+body.dark-mode .goal-section {
+    background: #2a2a4a;
+}
+
+.goal-section input {
+    width: 60px;
+    padding: 6px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.goal-section button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Data Controls */
+.data-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.data-controls button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.data-controls button:hover {
+    background: #5a6fd6;
+}
+
 footer {
     text-align: center;
     margin-top: 20px;
     color: #666;
-    font-size: 14px;
+    font-size: 13px;
 }
 
-#totalDays {
-    color: #4CAF50;
-    font-weight: bold;
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+canvas {
+    width: 100% !important;
 }
