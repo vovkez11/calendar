@@ -9,13 +9,32 @@
 <body>
     <div class="container">
         <header>
-            <h1>📅 Habit Tracker</h1>
+            <div class="header-top">
+                <h1>📅 Habit Tracker</h1>
+                <button id="darkModeToggle" class="icon-btn">🌙</button>
+            </div>
             <div class="month-nav">
                 <button id="prevMonth">&lt;</button>
                 <h2 id="currentMonth"></h2>
                 <button id="nextMonth">&gt;</button>
             </div>
         </header>
+        
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-label">Current Streak</span>
+                <span class="stat-value" id="currentStreak">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">This Month</span>
+                <span class="stat-value" id="monthProgress">0/31</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">All Time</span>
+                <span class="stat-value" id="totalDays">0</span>
+            </div>
+        </div>
         
         <div class="weekday-header">
             <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
@@ -24,11 +43,34 @@
         
         <div class="calendar-grid" id="calendar"></div>
         
+        <!-- Goal Section -->
+        <div class="goal-section">
+            <label for="monthlyGoal">Monthly Goal:</label>
+            <input type="number" id="monthlyGoal" min="1" max="31" value="20">
+            <button id="saveGoal">Set Goal</button>
+        </div>
+        
+        <div class="data-controls">
+            <button id="exportData">📥 Export Data</button>
+            <button id="importData">📤 Import Data</button>
+            <input type="file" id="importFile" accept=".json" hidden>
+        </div>
+        
         <footer>
-            <p>Total streak: <span id="totalDays">0</span> days</p>
+            <p>💡 Click any day to toggle completion</p>
         </footer>
     </div>
     
+    <!-- Chart for yearly view -->
+    <div class="modal" id="chartModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3>Yearly Progress</h3>
+            <canvas id="progressChart" height="300"></canvas>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
